@@ -1,19 +1,37 @@
 -- CREATE DATABASE car_service;
 
--- drop type and table in reverse order
-DROP TYPE IF EXISTS Address;
-DROP TYPE IF EXISTS Location;
-
+-- drop table and type in reverse order
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS trip;
+DROP TABLE IF EXISTS car;
 DROP TABLE IF EXISTS rider;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS users;
 
+DROP TYPE IF EXISTS PaymentType;
+DROP TYPE IF EXISTS Rating;
+DROP TYPE IF EXISTS TripStatus;
+DROP TYPE IF EXISTS Color;
+DROP TYPE IF EXISTS Document;
+DROP TYPE IF EXISTS Category;
+DROP TYPE IF EXISTS Location;
+DROP TYPE IF EXISTS Address;
+
 
 CREATE TYPE Address AS (
-    street VARCHAR(100),~
+    street VARCHAR(100),
     city VARCHAR(100),
     postal_code VARCHAR(10),
     country VARCHAR(60)
+);
+
+CREATE TYPE Category AS ENUM ('citizenship', 'license', 'passport', 'other');
+
+CREATE TYPE Document AS (
+    category Category,
+    document_no VARCHAR(255),
+    issued_on DATE,
+    expires_on DATE
 );
 
 CREATE TYPE Location AS (
@@ -22,11 +40,9 @@ CREATE TYPE Location AS (
 );
 
 
-CREATE TYPE Color AS ENUM ('red', 'green', 'blue', 'yellow', 'black', 'white');
+CREATE TYPE Color AS ENUM ('red', 'green', 'blue', 'yellow', 'black', 'white', 'grey', 'purple', 'brown', 'orange', 'pink', 'silver', 'gold');
 
 CREATE TYPE TripStatus AS ENUM ('requested', 'accepted', 'inprogress', 'cancelled', 'completed');
-
-CREATE TYPE Category AS ENUM ('citizenship', 'license', 'passport', 'other');
 
 CREATE TYPE Rating AS ENUM ('1', '2', '3', '4', '5');
 
@@ -35,7 +51,6 @@ CREATE TYPE PaymentType AS ENUM ('online', 'cash', 'card');
 
 -- base user table
 CREATE TABLE users(
-    id serial PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(254) UNIQUE NOT NULL,
     phone_number VARCHAR(20) UNIQUE NOT NULL,
@@ -47,32 +62,35 @@ CREATE TABLE users(
 
 -- inherit rider from user table
 CREATE TABLE rider (
-  is_verified BOOLEAN NOT NULL DEFAULT FALSE
+    id serial PRIMARY KEY,
+    is_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    document Document[] NOT NULL
 ) INHERITS (users);
 
 -- insert data into rider table
-INSERT INTO rider(name, email, phone_number, password, address, created_at, updated_at, is_verified)
+INSERT INTO rider(name, email, phone_number, password, address, created_at, updated_at, is_verified, document)
 VALUES
-('Lucilia Sowray', 'lsowray0@bandcamp.com', '+86 559 706 3485', 'ZWYVIDd3W0', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), false),
-('Alvis Higford', 'ahigford1@behance.net', '+46 909 414 2567', 'qD0kt8W1sTI', ARRAY[('968 Bay Avenue', 'Barru', '99876', 'Indonesia'), ('03824 Truax Lane', 'Tongxing', null, 'China')]::Address[], NOW(), NOW(), true),
-('Gaby D''Arrigo', 'gdarrigo2@bbb.org', '+852 697 441 5096', 'gkpjLICCNq', ARRAY[('50144 Prairieview Way', 'Antsirabe', '09876', 'Madagascar')]::Address[], NOW(), NOW(), false),
-('Rheta Trewman', 'rtrewman3@yellowpages.com', '+47 144 578 1425', 'DYLSyGHE3', ARRAY[('8 Bartelt Crossing', 'Les Abymes', '97182', 'Guadeloupe')]::Address[], NOW(), NOW(), false),
-('Hort Cadwallader', 'hcadwallader4@ibm.com', '+254 495 295 7406', 'YWJ2k8', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false),
-('Juliet Itzhak', 'jitzhak5@tumblr.com', '+86 866 469 9224', 'I13wS8oCIBN', ARRAY[('805 Gulseth Circle', 'Karanggeneng', '45329', 'Indonesia')]::Address[], NOW(), NOW(), true),
-('Gerardo Garnar', 'ggarnar6@google.it', '+62 272 486 2375', 'mjjeQy', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false),
-('Mabel Rawdales', 'mrawdales7@imageshack.us', '+47 874 108 7793', 'B6lbfZv5nPEg', ARRAY[('089 Cherokee Way', 'Stírion', '47541', 'Greece')]::Address[], NOW(), NOW(), true),
-('Simmonds Reding', 'sreding8@comcast.net', '+34 644 253 1371', 'eJBV8iAs', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany'), ('22 Messerschmidt Park', 'Huimin', null, 'China')]::Address[], NOW(), NOW(), true),
-('Kennie Grimmett', 'kgrimmett9@bing.com', '+86 517 853 5063', '3qZgWw6YMBpk', ARRAY[('19 Northport Drive', 'Graz', '8042', 'Austria')]::Address[], NOW(), NOW(), false),
-('Jo-ann Mollen', 'jmollena@canalblog.com', '+86 631 879 5309', 'e3pgI0s07Ycv', ARRAY[('6462 Declaration Circle', 'Pagsañgahan', '4324', 'Philippines')]::Address[], NOW(), NOW(), true),
-('Carolee Deaconson', 'cdeaconsonb@upenn.edu', '+48 445 314 8675', 'K1Lb6YYcxJJx', ARRAY[('2208 Dawn Terrace', 'Arauca', '810009', 'Colombia'), ('8574 Del Mar Junction', 'Bandar ‘Abbās', null, 'Iran')]::Address[], NOW(), NOW(), true),
-('Sallee Benbrick', 'sbenbrickc@blinklist.com', '+48 459 631 7325', 'bvvjNN', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false),
-('Raquel Djuricic', 'rdjuricicd@wikia.com', '+86 319 745 1936', 'p76GgV9jTb', ARRAY[('55 Bartillon Circle', 'Cantuk Kidul', '8897', 'Indonesia'), ('70581 Waywood Trail', 'Seririt', null, 'Indonesia')]::Address[], NOW(), NOW(), false),
-('Crysta Poundford', 'cpoundforde@reverbnation.com', '+63 393 178 7179', 'HxorEFb', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), true);
+('Lucilia Sowray', 'lsowray0@bandcamp.com', '+86 559 706 3485', 'ZWYVIDd3W0', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), false, ARRAY[('license', '7579376806', '2022/04/23', '2022/06/19')]::Document[]),
+('Alvis Higford', 'ahigford1@behance.net', '+46 909 414 2567', 'qD0kt8W1sTI', ARRAY[('968 Bay Avenue', 'Barru', '99876', 'Indonesia'), ('03824 Truax Lane', 'Tongxing', null, 'China')]::Address[], NOW(), NOW(), true, ARRAY[('license', '8863596603', '2020/03/27', '2021/10/21')]::Document[]),
+('Gaby D''Arrigo', 'gdarrigo2@bbb.org', '+852 697 441 5096', 'gkpjLICCNq', ARRAY[('50144 Prairieview Way', 'Antsirabe', '09876', 'Madagascar')]::Address[], NOW(), NOW(), false, ARRAY[('license', '3795739934', '2019/08/08', '2021/08/07')]::Document[]),
+('Rheta Trewman', 'rtrewman3@yellowpages.com', '+47 144 578 1425', 'DYLSyGHE3', ARRAY[('8 Bartelt Crossing', 'Les Abymes', '97182', 'Guadeloupe')]::Address[], NOW(), NOW(), false, ARRAY[('license', '0636288730', '2019/12/25', '2022/05/10')]::Document[]),
+('Hort Cadwallader', 'hcadwallader4@ibm.com', '+254 495 295 7406', 'YWJ2k8', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false, ARRAY[('license', '1610164601', '2021/07/27', '2021/09/15')]::Document[]),
+('Juliet Itzhak', 'jitzhak5@tumblr.com', '+86 866 469 9224', 'I13wS8oCIBN', ARRAY[('805 Gulseth Circle', 'Karanggeneng', '45329', 'Indonesia')]::Address[], NOW(), NOW(), true, ARRAY[('license', '9721186619', '2020/10/07', '2021/09/02')]::Document[]),
+('Gerardo Garnar', 'ggarnar6@google.it', '+62 272 486 2375', 'mjjeQy', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false, ARRAY[('license', '4443595244', '2021/07/14', '2022/04/18')]::Document[]),
+('Mabel Rawdales', 'mrawdales7@imageshack.us', '+47 874 108 7793', 'B6lbfZv5nPEg', ARRAY[('089 Cherokee Way', 'Stírion', '47541', 'Greece')]::Address[], NOW(), NOW(), true, ARRAY[('license', '8343329236', '2021/10/01', '2022/01/10')]::Document[]),
+('Simmonds Reding', 'sreding8@comcast.net', '+34 644 253 1371', 'eJBV8iAs', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany'), ('22 Messerschmidt Park', 'Huimin', null, 'China')]::Address[], NOW(), NOW(), true, ARRAY[('license', '4184470335', '2021/09/17', '2022/01/09')]::Document[]),
+('Kennie Grimmett', 'kgrimmett9@bing.com', '+86 517 853 5063', '3qZgWw6YMBpk', ARRAY[('19 Northport Drive', 'Graz', '8042', 'Austria')]::Address[], NOW(), NOW(), false, ARRAY[('license', '2105942407', '2022/03/10', '2022/03/02')]::Document[]),
+('Jo-ann Mollen', 'jmollena@canalblog.com', '+86 631 879 5309', 'e3pgI0s07Ycv', ARRAY[('6462 Declaration Circle', 'Pagsañgahan', '4324', 'Philippines')]::Address[], NOW(), NOW(), true, ARRAY[('license', '4877070796', '2021/07/28', '2022/03/04')]::Document[]),
+('Carolee Deaconson', 'cdeaconsonb@upenn.edu', '+48 445 314 8675', 'K1Lb6YYcxJJx', ARRAY[('2208 Dawn Terrace', 'Arauca', '810009', 'Colombia'), ('8574 Del Mar Junction', 'Bandar ‘Abbās', null, 'Iran')]::Address[], NOW(), NOW(), true, ARRAY[('license', '8179719464', '2020/10/28', '2021/11/23')]::Document[]),
+('Sallee Benbrick', 'sbenbrickc@blinklist.com', '+48 459 631 7325', 'bvvjNN', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false, ARRAY[('license', '3976402834', '2020/05/19', '2021/11/27')]::Document[]),
+('Raquel Djuricic', 'rdjuricicd@wikia.com', '+86 319 745 1936', 'p76GgV9jTb', ARRAY[('55 Bartillon Circle', 'Cantuk Kidul', '8897', 'Indonesia'), ('70581 Waywood Trail', 'Seririt', null, 'Indonesia')]::Address[], NOW(), NOW(), false, ARRAY[('license', '1084700883', '2020/05/15', '2021/12/21')]::Document[]),
+('Crysta Poundford', 'cpoundforde@reverbnation.com', '+63 393 178 7179', 'HxorEFb', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), true, ARRAY[('license', '5503086066', '2021/10/14', '2022/06/07')]::Document[]);
 
 
 -- inherit customer from user table
 CREATE TABLE customer (
-  account_balance money DEFAULT 0
+    id serial PRIMARY KEY,
+    account_balance money DEFAULT 0
 ) INHERITS (users);
 
 -- insert data into customer table
@@ -98,29 +116,48 @@ VALUES
 
 CREATE TABLE car(
     id serial PRIMARY KEY,
+    rider_id INT,
     make VARCHAR(100) NOT NULL,
     model VARCHAR(50) NOT NULL,
     year INTEGER NOT NULL,
     license_plate_no VARCHAR(10) NOT NULL,
     color Color NOT NULL,
-    base_rate money NOT NULL
+    base_rate money NOT NULL,
+
+    CONSTRAINT fk_rider
+        FOREIGN KEY(rider_id) 
+	        REFERENCES rider(id)
+            ON DELETE CASCADE
 );
+
+-- insert into car table
+
 
 -- create table document
 
+-- CREATE TABLE document(
+--     id serial PRIMARY KEY,
+--     rider_id INT,
+--     category Category NOT NULL,
+--     document_no VARCHAR(255) NOT NULL,
+--     issued_on DATE NOT NULL,
+--     expires_on DATE,
+    
+--     CONSTRAINT fk_rider
+--         FOREIGN KEY(rider_id) 
+-- 	        REFERENCES rider(id)
+--             ON DELETE CASCADE
+-- );
 
-CREATE TABLE document(
-    id serial PRIMARY KEY,
-    category Category NOT NULL,
-    document_no VARCHAR(255) NOT NULL,
-    issued_on DATE NOT NULL,
-    expires_on DATE
-);
+--insert into document table
+
 
 -- create table for trip
 
 CREATE TABLE trip(
     id serial PRIMARY KEY,
+    rider_id INT,
+    customer_id INT,
     requested_on TIMESTAMP NOT NULL,
     pickup_location Location NOT NULL,
     destination_location Location,
@@ -129,24 +166,42 @@ CREATE TABLE trip(
     end_on TIMESTAMP,
     status TripStatus,
     customer_rating Rating,
-    rider_rating Rating
+    rider_rating Rating,
+    
+    CONSTRAINT fk_rider
+        FOREIGN KEY(rider_id)
+            REFERENCES rider(id)
+            ON DELETE CASCADE,
+
+    CONSTRAINT fk_customer
+        FOREIGN KEY(customer_id)
+            REFERENCES customer(id)
+            ON DELETE CASCADE
 );
+
+--insert into trip table
 
 
 -- create table for payment
 
 CREATE TABLE payment (
     id serial PRIMARY KEY,
+    trip_id INT,
     payment_date TIMESTAMP NOT NULL,
     type PaymentType NOT NULL,
     base_rate money NOT NULL,
     surge_rate money NOT NULL,
     tip_amount money NOT NULL,
-    total money NOT NULL
+    total money NOT NULL,
+
+    CONSTRAINT fk_trip
+        FOREIGN KEY(trip_id)
+            REFERENCES trip(id)
+            ON DELETE CASCADE
 );
 
 
-
+-- insert into payment table
 
 
 

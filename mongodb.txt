@@ -1,0 +1,74 @@
+// show all database
+show dbs
+
+// create database if not exists and switch to database
+use car_service
+
+// drop database
+//db.dropDatabase()
+
+// view current database
+db
+
+// show all collections
+show collections
+
+// create customer collection
+db.createCollection('customer')
+
+// create rider collection
+db.createCollection('rider')
+
+// create trip collection
+db.createCollection('trip')
+
+// insert data into customer
+db.customer.insertMany([
+    {
+        name: "Loraine Giddings",
+        phone_number: "+1 (865) 581-9071",
+        email: "lorainegiddings@gmail.com",
+        password: "ZWYVIDd3W0",
+        account_balance: 100.60,
+        address: [{street: "0240 Larry Junction", city: "Guaxupé", postal_code: "37800", country: "Brazil"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+])
+
+
+db.rider.insertMany([
+    {
+        name: "Rider kto mah",
+        phone_number: "+977-9824902116",
+        email: "pawanlalganesh@gmail.com",
+        password: "Secret@520",
+        is_verified: false,
+        address: [{street: "ktm", city: "ktm", postal_code: "1234", country: "Nepal"}],
+        document: [{category: "license", document_no: "1234567890", issued_on: new Date("2021-10-10"), expires_on: new Date("2022-10-10")}],
+        car: {make: "123", model: "123", year: 1999, license_plate_no: "1212", base_rate: 120.12},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+])
+
+db.trip.insertMany([
+    {
+        requested_on: new Date(),
+        pickup_location: {latitute: 32.983101, longitude: 107.766613},
+        destination_location: {latitute: "107.766613", longitude: "107.766613"},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "pending",
+        customer_rating: null,
+        rider_rating: null,
+        payment: {
+            payment_date: new Date(),
+            type: "cash",
+            base_rate: 12.12,
+            surge_rate: 1.1,
+            tip_amount: 10,
+            tota: 9090
+        }
+    }
+])

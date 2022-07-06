@@ -22,6 +22,10 @@ db.createCollection('rider')
 // create trip collection
 db.createCollection('trip')
 
+// create trip collection
+db.createCollection('payment')
+
+
 // insert data into customer
 db.customer.insertMany([
     {
@@ -114,7 +118,7 @@ db.customer.insertMany([
         created_at: new Date(),
         updated_at: new Date()
     },
-        {
+    {
         name: "Hilary Ockleshaw",
         phone_number: "+370 172 699 4050",
         email: "hockleshaw7@imgur.com",
@@ -126,39 +130,714 @@ db.customer.insertMany([
     },
 ])
 
-
 db.rider.insertMany([
     {
-        name: "Rider kto mah",
-        phone_number: "+977-9824902116",
-        email: "pawanlalganesh@gmail.com",
-        password: "Secret@520",
+        name: "Lucilia Sowray",
+        phone_number: "+86 559 706 3485",
+        email: "lsowray0@bandcamp.com",
+        password: "ZWYVIDd3W0",
         is_verified: false,
-        address: [{street: "ktm", city: "ktm", postal_code: "1234", country: "Nepal"}],
-        document: [{category: "license", document_no: "1234567890", issued_on: new Date("2021-10-10"), expires_on: new Date("2022-10-10")}],
-        car: {make: "123", model: "123", year: 1999, license_plate_no: "1212", base_rate: 120.12},
+        address: [{street: "0240 Larry Junction", city: "Guaxupé", postal_code: "37800", country: "Brazil"}],
+        document: [{category: "license", document_no: "7579376806", issued_on: new Date("2022-04-23"), expires_on: new Date("2022-06-19")},
+        {category: "passport", document_no: "6288049301", issued_on: new Date("2020-11-25"), expires_on: new Date("2021-10-03")}],
+        car: {make: "Jeep", model: "Liberty", year: 2012, license_plate_no: "AAA 7836", color: 'yellow', base_rate: 67.96},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Alvis Higford",
+        phone_number: "+46 909 414 2567",
+        email: "ahigford1@behance.net",
+        password: "qD0kt8W1sTI",
+        is_verified: false,
+        address: [{street: "968 Bay Avenue", city: "Barru", postal_code: "99876", country: "Indonesia"}, {street: "03824 Truax Lane", city: "Tongxing", postal_code: null, country: "China"}],
+        document: [{category: "license", document_no: "8863596603", issued_on: new Date("2020-03-27"), expires_on: new Date("2021-10-21")}],
+        car: {make: "Lincoln", model: "Continental", year: 1998, license_plate_no: "BB 1824", color: 'gold', base_rate: 30.72},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Gaby D''Arrigo",
+        phone_number: "+852 697 441 5096",
+        email: "gdarrigo2@bbb.org",
+        password: "gkpjLICCNq",
+        is_verified: false,
+        address: [{street: "50144 Prairieview Way", city: "Antsirabe", postal_code: "09876", country: "Madagascar"}],
+        document: [{category: "license", document_no: "3795739934", issued_on: new Date("2019-08-08"), expires_on: new Date("2021-08-07")}],
+        car: {make: "Kia", model: "Optima", year: 2010, license_plate_no: "CC 0719", color: 'silver', base_rate: 25.36},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Rheta Trewman",
+        phone_number: "+47 144 578 1425",
+        email: "rtrewman3@yellowpages.com",
+        password: "DYLSyGHE3",
+        is_verified: false,
+        address: [{street: "8 Bartelt Crossing", city: "Les Abymes", postal_code: "97182", country: "Guadeloupe"}],
+        document: [{category: "license", document_no: "0636288730", issued_on: new Date("2019-12-25"), expires_on: new Date("2022-05-10")}],
+        car: {make: "Volkswagen", model: "Jetta", year: 2000, license_plate_no: "DD 6604", color: 'red', base_rate: 25.95},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Hort Cadwallader",
+        phone_number: "+254 495 295 7406",
+        email: "hcadwallader4@ibm.com",
+        password: "YWJ2k8",
+        is_verified: false,
+        address: [{street: "Obere Str. 57", city: "Berlin", postal_code: "12209", country: "Germany"}, {street: "03824 Truax Lane", city: "Tongxing", postal_code: null, country: "China"}],
+        document: [{category: "license", document_no: "1610164601", issued_on: new Date("2020-07-27"), expires_on: new Date("2021-09-15")}],
+        car: {make: "Buick", model: "Roadmaster", year: 1995, license_plate_no: "EE 6512", color: 'gold', base_rate: 62.39},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Juliet Itzhak",
+        phone_number: "+86 866 469 9224",
+        email: "jitzhak5@tumblr.com",
+        password: "I13wS8oCIBN",
+        is_verified: false,
+        address: [{street: "805 Gulseth Circle", city: "Karanggeneng", postal_code: "45329", country: "Indonesia"}],
+        document: [{category: "license", document_no: "9721186619", issued_on: new Date("2020-10-07"), expires_on: new Date("2021-09-02")}],
+        car: {make: "Mazda", model: "Miata MX-5", year: 1999, license_plate_no: "EF 1001", color: 'silver', base_rate: 98.46},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Gerardo Garnar",
+        phone_number: "+62 272 486 2375",
+        email: "ggarnar6@google.it",
+        password: "mjjeQy",
+        is_verified: false,
+        address: [{street: "Obere Str. 57", city: "Berlin", postal_code: "12209", country: "Germany"}],
+        document: [{category: "license", document_no: "4443595244", issued_on: new Date("2021-07-14"), expires_on: new Date("2022-04-18")}],
+        car: {make: "Acura", model: "RDX", year: 1998, license_plate_no: "AL 4792", color: 'purple', base_rate: 45.21},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Mabel Rawdales",
+        phone_number: "+47 874 108 7793",
+        email: "mrawdales7@imageshack.us",
+        password: "B6lbfZv5nPEg",
+        is_verified: false,
+        address: [{street: "089 Cherokee Way", city: "Stírion", postal_code: "47541", country: "Greece"}],
+        document: [{category: "license", document_no: "8343329236", issued_on: new Date("2021-10-01"), expires_on: new Date("2022-01-10")}],
+        car: {make: "Pontiac", model: "Trans Sport", year: 1990, license_plate_no: "DA 5490", color: 'silver', base_rate: 63.20},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Simmonds Reding",
+        phone_number: "+34 644 253 1371",
+        email: "sreding8@comcast.net",
+        password: "eJBV8iAs",
+        is_verified: false,
+        address: [{street: "Obere Str. 57", city: "Berlin", postal_code: "12209", country: "Germany"}, {street: "22 Messerschmidt Park", city: "Huimin", postal_code: null, country: "China"}],
+        document: [{category: "license", document_no: "4184470335", issued_on: new Date("2021-09-17"), expires_on: new Date("2022-01-09")}],
+        car: {make: "Chevrolet", model: "Corvette", year: 1973, license_plate_no: "CF 5571", color: 'white', base_rate: 13.11},
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+     {
+        name: "Kennie Grimmett",
+        phone_number: "+86 517 853 5063",
+        email: "kgrimmett9@bing.com",
+        password: "3qZgWw6YMBpk",
+        is_verified: false,
+        address: [{street: "19 Northport Drive", city: "Graz", postal_code: "8042", country: "Austria"}],
+        document: [{category: "license", document_no: "2105942407", issued_on: new Date("2022-03-10"), expires_on: new Date("2022-03-02")}],
+        car: {make: "Cadillac", model: "DeVille", year: 1998, license_plate_no: "GF 5051", color: 'blue', base_rate: 87.28},
         created_at: new Date(),
         updated_at: new Date()
     },
 ])
 
+
+
 db.trip.insertMany([
     {
-        requested_on: new Date(),
+        requested_on: new Date("2021-11-04 14:31:52"),
         pickup_location: {latitute: 32.983101, longitude: 107.766613},
-        destination_location: {latitute: "107.766613", longitude: "107.766613"},
+        destination_location: {latitute: "32.983101", longitude: "107.766613"},
         start_on: new Date(),
         end_on: new Date(),
-        status: "pending",
+        status: "requested",
         customer_rating: null,
         rider_rating: null,
-        payment: {
-            payment_date: new Date(),
-            type: "cash",
-            base_rate: 12.12,
-            surge_rate: 1.1,
-            tip_amount: 10,
-            tota: 9090
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
         }
-    }
+    },
+    {
+        requested_on: new Date("2022-03-15 07:45:19"),
+        pickup_location: {latitute: 19.27898, longitude: -99.1653351},
+        destination_location: {latitute: 19.27898, longitude: -99.1653351},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+     {
+        requested_on: new Date("2021-12-24 12:43:38"),
+        pickup_location: {latitute: 49.2803655, longitude: -0.2062549},
+        destination_location: {latitute: 49.2803655, longitude: -0.2062549},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-03-23 00:28:43"),
+        pickup_location: {latitute: 49.9890993, longitude: 18.5699721},
+        destination_location: {latitute: 49.9890993, longitude: 18.5699721},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-09-01 07:52:13"),
+        pickup_location: {latitute: -17.8599943, longitude: -41.5091004},
+        destination_location: {latitute: -17.8599943, longitude: -41.5091004},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-12-06 09:31:23"),
+        pickup_location: {latitute: 30.8936954, longitude: 50.0932428},
+        destination_location: {latitute: 30.8936954, longitude: 50.0932428},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-08-23 10:16:19"),
+        pickup_location: {latitute: 32.31876, longitude: 118.930364},
+        destination_location: {latitute: 32.31876, longitude: 118.930364},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-06-02 08:10:21"),
+        pickup_location: {latitute: 9.9578348, longitude: 124.1789637},
+        destination_location: {latitute: 9.9578348, longitude: 124.1789637},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-11-16 21:13:41"),
+        pickup_location: {latitute: -20.7314751, longitude: -42.0299263},
+        destination_location: {latitute: -20.7314751, longitude: -42.0299263},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-02-22 07:24:51"),
+        pickup_location: {latitute: 59.4048322, longitude: 17.9494929},
+        destination_location: {latitute: 59.4048322, longitude: 17.9494929},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-03-29 18:20:30"),
+        pickup_location: {latitute: 40.8536972, longitude: 107.766613},
+        destination_location: {latitute: 40.8536972, longitude: 40.8536972},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-11-04 14:31:52"),
+        pickup_location: {latitute: 48.7320309, longitude: 16.905384},
+        destination_location: {latitute: 48.7320309, longitude: 16.905384},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-04-04 10:45:33"),
+        pickup_location: {latitute: 13.8086742, longitude: -89.1801225},
+        destination_location: {latitute: 13.8086742, longitude: -89.1801225},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-08-19 10:52:40"),
+        pickup_location: {latitute: 47.3168226, longitude: 47.3786779},
+        destination_location: {latitute: 47.3168226, longitude: 47.3786779},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-09-06 09:20:02"),
+        pickup_location: {latitute: 44.0527811, longitude: 6.1717148},
+        destination_location: {latitute: 44.0527811, longitude: 6.1717148},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-08-01 21:12:29"),
+        pickup_location: {latitute: 32.318255, longitude: 109.715304},
+        destination_location: {latitute: 32.318255, longitude: 109.715304},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-11-04 14:31:52"),
+        pickup_location: {latitute: -7.5201771, longitude: 109.2638245},
+        destination_location: {latitute: -7.5201771, longitude: 109.2638245},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-04-23 09:56:39"),
+        pickup_location: {latitute: 45.8697083, longitude: 43.3478599},
+        destination_location: {latitute: 45.8697083, longitude: 43.3478599},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2021-12-27 17:46:18"),
+        pickup_location: {latitute: 9.5403936, longitude: 125.5240221},
+        destination_location: {latitute: 9.5403936, longitude: 125.5240221},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
+    {
+        requested_on: new Date("2022-03-28 08:12:01"),
+        pickup_location: {latitute: 25.6829687, longitude: 100.1325059},
+        destination_location: {latitute: 25.6829687, longitude: 100.1325059},
+        start_on: new Date(),
+        end_on: new Date(),
+        status: "requested",
+        customer_rating: null,
+        rider_rating: null,
+        rider: {
+            $ref: "rider",
+            $id: ObjectId("62c5d8aad61d7ef956e3cb26")
+        },
+        customer: {
+            $ref: "customer",
+            $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
+        }
+    },
 ])
+
+
+db.payment.insertMany([
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 30.72,
+        surge_rate: 0.00,
+        tip_amount: 5.00,
+        total: 35.72,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 30.72,
+        surge_rate: 0.00,
+        tip_amount: 2.00,
+        total: 32.72,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 25.36,
+        surge_rate: 10.00,
+        tip_amount: 3.00,
+        total: 29.36,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "online",
+        base_rate: 25.36,
+        surge_rate: 0.00,
+        tip_amount: 4.00,
+        total: 29.36,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 25.36,
+        surge_rate: 2.00,
+        tip_amount: 6.00,
+        total: 32.36,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 98.46,
+        surge_rate: 0.00,
+        tip_amount: 1.00,
+        total: 99.46,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 45.21,
+        surge_rate: 6.00,
+        tip_amount: 0.00,
+        total: 51.21,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "online",
+        base_rate: 63.20,
+        surge_rate: 0.00,
+        tip_amount: 0.00,
+        total: 63.00,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 13.11,
+        surge_rate: 0.00,
+        tip_amount: 2.00,
+        total: 15.11,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 92.73,
+        surge_rate: 0.00,
+        tip_amount: 0.00,
+        total: 92.73,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 92.73,
+        surge_rate: 0.00,
+        tip_amount: 0.00,
+        total: 92.73,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 27.17,
+        surge_rate: 3.00,
+        tip_amount: 1.00,
+        total: 31.17,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "online",
+        base_rate: 87.08,
+        surge_rate: 0.00,
+        tip_amount: 0.00,
+        total: 87.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+        {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 87.08,
+        surge_rate: 0.00,
+        tip_amount: 1.00,
+        total: 88.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 87.08,
+        surge_rate: 8.00,
+        tip_amount: 1.00,
+        total: 96.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+        {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 87.08,
+        surge_rate: 0.00,
+        tip_amount: 2.00,
+        total: 89.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 87.08,
+        surge_rate: 0.00,
+        tip_amount: 2.00,
+        total: 89.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+    {
+        payment_date: new Date(),
+        type: "cash",
+        base_rate: 87.08,
+        surge_rate: 1.00,
+        tip_amount: 2.00,
+        total: 98.08,
+        trip: {
+            $ref: "trip",
+            $id: ObjectId("62c5dfd8ef83c0dd6e30e41c")
+        }
+    },
+])
+
+
+

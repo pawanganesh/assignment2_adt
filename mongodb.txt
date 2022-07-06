@@ -34,6 +34,96 @@ db.customer.insertMany([
         created_at: new Date(),
         updated_at: new Date()
     },
+    {
+        name: "Rudolpho Giddings",
+        phone_number: "+1 (865) 581-9071",
+        email: "eudolphogiddings@hotmail.com",
+        password: "ZWYVIDd3W0",
+        account_balance: 1.60,
+        address: [{street: "0240 Larry Junction", city: "Guaxupé", postal_code: "37800", country: "Brazil"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Marga Rendle",
+        phone_number: "+966 946 311 4053",
+        email: "mrendle0@paginegialle.it",
+        password: "IZSr8I8p",
+        account_balance: 178.60,
+        address: [{street: "181 Bobwhite Drive", city: "Al Ulá", postal_code: "9876", country: "Saudi Arabia"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Lonny Caile",
+        phone_number: "+234 550 828 7192",
+        email: "lcaile1@ezinearticles.com",
+        password: "xfZlUGbb",
+        account_balance: 178.60,
+        address: [{street: "081 Burrows Avenue", city: "Aku", postal_code: "4567", country: "Nigeria"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Lorry Dagleas",
+        phone_number: "+66 324 700 9721",
+        email: "ldagleas2@4shared.com",
+        password: "mslNVfCt6",
+        account_balance: 6098.08,
+        address: [{street: "31 Raven Parkway", city: "Ban Na Muang", postal_code: "71150", country: "Thailand"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Gabriel Barracks",
+        phone_number: "+51 395 978 9343",
+        email: "gbarracks3@mapquest.com",
+        password: "s3usWSJ",
+        account_balance: 7980.92,
+        address: [{street: "84 Hanson Trail", city: "Olmos", postal_code: "7459", country: "Peru"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Meredith Maunsell",
+        phone_number: "+51 693 919 4241",
+        email: "mmaunsell4@parallels.com",
+        password: "ld7ZxaDu",
+        account_balance: 89865.22,
+        address: [{street: "8 Anthes Center", city: "Lahuaytambo", postal_code: "4587", country: "Peru"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Bartholomew Kirkby",
+        phone_number: "+46 494 109 2829",
+        email: "bkirkby5@wiley.com",
+        password: "8FS8LKqx",
+        account_balance: 80.87,
+        address: [{street: "7458 Arapahoe Park", city: "Mariefred", postal_code: "64781", country: "Sweden"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+    {
+        name: "Angelia Wimp",
+        phone_number: "+1 652 369 4726",
+        email: "awimp6@miibeian.gov.cn",
+        password: "uYgy3uZm",
+        account_balance: 5.81,
+        address: [{street: "7582 Schlimgen Street", city: "Camlachie", postal_code: "1487", country: "Canada"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
+        {
+        name: "Hilary Ockleshaw",
+        phone_number: "+370 172 699 4050",
+        email: "hockleshaw7@imgur.com",
+        password: "WzFlCO",
+        account_balance: 40.48,
+        address: [{street: "17 Hollow Ridge Pass", city: "Vilkaviskis", postal_code: "70073", country: "Lithuania"}],
+        created_at: new Date(),
+        updated_at: new Date()
+    },
 ])
 
 

@@ -22,9 +22,6 @@ db.createCollection('rider')
 // create trip collection
 db.createCollection('trip')
 
-// create trip collection
-db.createCollection('payment')
-
 
 // insert data into customer
 db.customer.insertMany([
@@ -202,7 +199,7 @@ db.rider.insertMany([
         email: "hcadwallader4@ibm.com",
         password: "YWJ2k8",
         is_verified: true,
-        address: [{street: "Obere Str. 57", city: "Berlin", postal_code: "12209", country: "Germany"}, {street: "03824 Truax Lane", city: "Tongxing", postal_code: null, country: "China"}],
+        address: [{street: "Obere Str. 57", city: "Berlin", postal_code: "12209", country: "Germany"}],
         document: [{category: "license", document_no: "1610164601", issued_on: new Date("2020-07-27"), expires_on: new Date("2021-09-15")}],
         car: {make: "Buick", model: "Roadmaster", year: 1995, license_plate_no: "EE 6512", color: 'gold', base_rate: 62.39},
         created_at: new Date(),
@@ -759,246 +756,200 @@ db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7107")}, {$set: {customer_rat
 db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {customer_rating: '1'}})
 db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7109")}, {$set: {customer_rating: '5'}})
 
-
-// insert into payment table
-db.payment.insertMany([
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7111"),
+//update trip with payment
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7105")}, {$set: {payment: {
         payment_date: new Date(),
-        type: "cash",
+        type: "online",
         base_rate: 30.72,
         surge_rate: 0.00,
         tip_amount: 5.00,
-        total: 35.72,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7105")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7112"),
+        total: 35.72
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7102")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 30.72,
         surge_rate: 0.00,
         tip_amount: 2.00,
         total: 32.72,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7102")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7113"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7110")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 25.36,
         surge_rate: 10.00,
         tip_amount: 3.00,
         total: 29.36,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7110")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7114"),
+}}})
+
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7101")}, {$set: {payment: {
         payment_date: new Date(),
         type: "online",
         base_rate: 25.36,
         surge_rate: 0.00,
         tip_amount: 4.00,
         total: 29.36,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7101")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7115"),
+}}})
+
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7100")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 25.36,
         surge_rate: 2.00,
         tip_amount: 6.00,
         total: 32.36,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7100")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7116"),
+}}})
+
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e92")}, {$set: {payment: {
         payment_date: new Date(),
-        type: "cash",
+        type: "card",
         base_rate: 98.46,
         surge_rate: 0.00,
         tip_amount: 1.00,
         total: 99.46,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e92")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7117"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e94")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 45.21,
         surge_rate: 6.00,
         tip_amount: 0.00,
         total: 51.21,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e94")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7118"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e99")}, {$set: {payment: {
         payment_date: new Date(),
         type: "online",
         base_rate: 63.20,
         surge_rate: 0.00,
         tip_amount: 0.00,
         total: 63.00,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e99")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7119"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e96")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 13.11,
         surge_rate: 0.00,
         tip_amount: 2.00,
         total: 15.11,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e96")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7120"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e95")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 92.73,
         surge_rate: 0.00,
         tip_amount: 0.00,
         total: 92.73,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e95")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7121"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7103")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 92.73,
         surge_rate: 0.00,
         tip_amount: 0.00,
         total: 92.73,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7103")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7122"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7109")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 27.17,
         surge_rate: 3.00,
         tip_amount: 1.00,
         total: 31.17,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7109")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7123"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e97")}, {$set: {payment: {
         payment_date: new Date(),
         type: "online",
         base_rate: 87.08,
         surge_rate: 0.00,
         tip_amount: 0.00,
         total: 87.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e97")
-        }
-    },
-        {
-            _id: ObjectId("62c5da2d8cf53304b1cd7124"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e93")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 87.08,
         surge_rate: 0.00,
         tip_amount: 1.00,
         total: 88.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e93")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7125"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7107")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 87.08,
         surge_rate: 8.00,
         tip_amount: 1.00,
         total: 96.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7107")
-        }
-    },
-        {
-            _id: ObjectId("62c5da2d8cf53304b1cd7126"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7106")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 87.08,
         surge_rate: 0.00,
         tip_amount: 2.00,
         total: 89.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7106")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7127"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e91")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 87.08,
         surge_rate: 0.00,
         tip_amount: 2.00,
         total: 89.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7e91")
-        }
-    },
-    {
-        _id: ObjectId("62c5da2d8cf53304b1cd7128"),
+}}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {payment: {
         payment_date: new Date(),
         type: "cash",
         base_rate: 87.08,
         surge_rate: 1.00,
         tip_amount: 2.00,
         total: 98.08,
-        trip: {
-            $ref: "trip",
-            $id: ObjectId("62c5da2d8cf53304b1cd7108")
-        }
+}}})
+
+
+// 5 (a)
+db.trip.aggregate([
+    {
+        $lookup:
+            {
+                from: "rider",
+                localField: "rider.$id",
+                foreignField: "_id",
+                as: "rider"
+            }
     },
-])
+    {
+        $lookup:
+        {
+                from: "customer",
+                localField: "customer.$id",
+                foreignField: "_id",
+                as: "customer"
+            }
+    }
+]).pretty()
 
 
+// 5 (b)
+db.rider.find({'address.country': 'Germany'}).pretty()
 
+// 5 (c)
+db.trip.find({
+    requested_on: {
+        $gt: ISODate("2022-01-01"),
+        $lte: ISODate("2022-07-01")
+    },
+    status: "completed"
+}).pretty()
+
+// 5 (d)
+
+db.trip.aggregate([
+    {$match: {status: 'completed'}},
+    {$group: {
+        _id: "$payment.type",
+        total: {$sum: "$payment.total"}
+    }
+    }
+]).pretty()
 
 

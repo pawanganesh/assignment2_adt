@@ -759,6 +759,7 @@ db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7107")}, {$set: {customer_rat
 db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {customer_rating: '1'}})
 db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7109")}, {$set: {customer_rating: '5'}})
 
+
 // insert into payment table
 db.payment.insertMany([
     {

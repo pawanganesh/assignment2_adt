@@ -274,7 +274,7 @@ db.rider.insertMany([
     },
 ])
 
-
+// insert data into trip
 db.trip.insertMany([
     {
         _id: ObjectId("62c5da2d8cf53304b1cd7e91"),
@@ -639,7 +639,6 @@ db.trip.insertMany([
     },
     {
         _id: ObjectId("62c5da2d8cf53304b1cd7110"),
-        _id: ObjectId("62c5d8bbd61d7ef956e3cb31"),
         requested_on: new Date("2022-03-28 08:12:01"),
         pickup_location: {latitute: 25.6829687, longitude: 100.1325059},
         destination_location: {latitute: 25.6829687, longitude: 100.1325059},
@@ -659,7 +658,60 @@ db.trip.insertMany([
     },
 ])
 
+// rider accepts or cancels the trip request
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e91")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e92")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e93")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e94")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e95")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e96")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e97")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e98")}, {$set: {status: "cancelled"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e99")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7100")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7101")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7102")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7103")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7104")}, {$set: {status: "cancelled"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7105")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7106")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7107")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7109")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7110")}, {$set: {status: "cancelled"}})
 
+// after the trip is accepted, the rider meets the customer at pickup location and update the status to inprogress and set the start time
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e91")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e92")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e93")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e94")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e95")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e96")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e97")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e98")}, {$set: {status: "cancelled"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7e99")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7100")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7101")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7102")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7103")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7104")}, {$set: {status: "cancelled"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7105")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7106")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7107")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7109")}, {$set: {status: "accepted"}})
+db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7110")}, {$set: {status: "cancelled"}})
+
+// after the they reach destination, drive updates the status to completed and set the end time
+
+
+// customer rates the rider
+
+
+// rider rates the customer
+
+
+// insert into payment table
 db.payment.insertMany([
     {
         _id: ObjectId("62c5da2d8cf53304b1cd7111"),
@@ -896,6 +948,8 @@ db.payment.insertMany([
         }
     },
 ])
+
+
 
 
 

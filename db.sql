@@ -186,26 +186,6 @@ VALUES
 (3, 4, '2021-12-27 17:46:18', (9.5403936, 125.5240221), (9.5403936, 125.5240221), 'requested'),
 (2, 3, '2022-03-28 08:12:01', (25.6829687, 100.1325059), (25.6829687, 100.1325059), 'requested');
 
-ObjectId("62c5d8aad61d7ef956e3cb26") ObjectId("62c5d8bbd61d7ef956e3cb34") (6, 10)
-ObjectId("62c5d8aad61d7ef956e3cb29") ObjectId("62c5d8bbd61d7ef956e3cb34") (9, 10)
-ObjectId("62c5d8aad61d7ef956e3cb27") ObjectId("62c5d8bbd61d7ef956e3cb31") (7, 7)
-ObjectId("62c5d8aad61d7ef956e3cb21") ObjectId("62c5d8bbd61d7ef956e3cb2e") (1, 4)
-ObjectId("62c5d8aad61d7ef956e3cb29") ObjectId("62c5d8bbd61d7ef956e3cb32") (9, 8)
-ObjectId("62c5d8aad61d7ef956e3cb29") ObjectId("62c5d8bbd61d7ef956e3cb32") (9, 8)
-ObjectId("62c5d8aad61d7ef956e3cb28") ObjectId("62c5d8bbd61d7ef956e3cb2e") (8, 4)
-ObjectId("62c5d8aad61d7ef956e3cb28") ObjectId("62c5d8bbd61d7ef956e3cb30") (8, 6)
-ObjectId("62c5d8aad61d7ef956e3cb23") ObjectId("62c5d8bbd61d7ef956e3cb31") (3, 7)
-ObjectId("62c5d8aad61d7ef956e3cb23") ObjectId("62c5d8bbd61d7ef956e3cb34") (3, 10)
-ObjectId("62c5d8aad61d7ef956e3cb22") ObjectId("62c5d8bbd61d7ef956e3cb31") (2, 7)
-ObjectId("62c5d8aad61d7ef956e3cb25") ObjectId("62c5d8bbd61d7ef956e3cb2b") (5, 1)
-ObjectId("62c5d8aad61d7ef956e3cb29") ObjectId("62c5d8bbd61d7ef956e3cb2b") (9, 1)
-ObjectId("62c5d8aad61d7ef956e3cb30") ObjectId("62c5d8bbd61d7ef956e3cb2f") (10, 5)
-ObjectId("62c5d8aad61d7ef956e3cb29") ObjectId("62c5d8bbd61d7ef956e3cb2b") (9, 1)
-ObjectId("62c5d8aad61d7ef956e3cb21") ObjectId("62c5d8bbd61d7ef956e3cb2d") (1, 3)
-ObjectId("62c5d8aad61d7ef956e3cb22") ObjectId("62c5d8bbd61d7ef956e3cb2f") (2, 5)
-ObjectId("62c5d8aad61d7ef956e3cb21") ObjectId("62c5d8bbd61d7ef956e3cb30") (1, 6)
-ObjectId("62c5d8aad61d7ef956e3cb23") ObjectId("62c5d8bbd61d7ef956e3cb2e") (3, 4)
-ObjectId("62c5d8aad61d7ef956e3cb22") ObjectId("62c5d8bbd61d7ef956e3cb2d") (2, 3)
 
 -- rider accepts or cancels the trip request
 UPDATE trip SET status='accepted' WHERE id=1;
@@ -330,7 +310,7 @@ CREATE TABLE payment (
 -- insert into payment table
 INSERT INTO payment(trip_id, payment_date, type, base_rate, surge_rate, tip_amount, total)
 VALUES
-(15, NOW(), 'online', '30.72',  '0.00', '5.00', '35.72'),
+(15, NOW(), 'online', '30.72',  '0.00', '5.00', '35.72'), 
 (12, NOW(), 'cash', '30.72', '0.00', '2.00', '32.72'),
 (20, NOW(), 'cash', '25.36', '1.00', '3.00', '29.36'),
 (11, NOW(), 'online', '25.36', '0.00', '4.00', '29.36'),

@@ -70,16 +70,16 @@ CREATE TABLE rider (
 -- insert data into rider table
 INSERT INTO rider(name, email, phone_number, password, address, created_at, updated_at, is_verified, document)
 VALUES
-('Lucilia Sowray', 'lsowray0@bandcamp.com', '+86 559 706 3485', 'ZWYVIDd3W0', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), false, ARRAY[('license', '7579376806', '2022/04/23', '2022/06/19'), ('passport', '6288049301', '2020/11/25', '2021/10/03')]::Document[]),
+('Lucilia Sowray', 'lsowray0@bandcamp.com', '+86 559 706 3485', 'ZWYVIDd3W0', ARRAY[('0240 Larry Junction', 'Guaxupé', '37800', 'Brazil')]::Address[], NOW(), NOW(), true, ARRAY[('license', '7579376806', '2022/04/23', '2022/06/19'), ('passport', '6288049301', '2020/11/25', '2021/10/03')]::Document[]),
 ('Alvis Higford', 'ahigford1@behance.net', '+46 909 414 2567', 'qD0kt8W1sTI', ARRAY[('968 Bay Avenue', 'Barru', '99876', 'Indonesia'), ('03824 Truax Lane', 'Tongxing', null, 'China')]::Address[], NOW(), NOW(), true, ARRAY[('license', '8863596603', '2020/03/27', '2021/10/21')]::Document[]),
-('Gaby D''Arrigo', 'gdarrigo2@bbb.org', '+852 697 441 5096', 'gkpjLICCNq', ARRAY[('50144 Prairieview Way', 'Antsirabe', '09876', 'Madagascar')]::Address[], NOW(), NOW(), false, ARRAY[('license', '3795739934', '2019/08/08', '2021/08/07')]::Document[]),
-('Rheta Trewman', 'rtrewman3@yellowpages.com', '+47 144 578 1425', 'DYLSyGHE3', ARRAY[('8 Bartelt Crossing', 'Les Abymes', '97182', 'Guadeloupe')]::Address[], NOW(), NOW(), false, ARRAY[('license', '0636288730', '2019/12/25', '2022/05/10')]::Document[]),
-('Hort Cadwallader', 'hcadwallader4@ibm.com', '+254 495 295 7406', 'YWJ2k8', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false, ARRAY[('license', '1610164601', '2021/07/27', '2021/09/15')]::Document[]),
+('Gaby D''Arrigo', 'gdarrigo2@bbb.org', '+852 697 441 5096', 'gkpjLICCNq', ARRAY[('50144 Prairieview Way', 'Antsirabe', '09876', 'Madagascar')]::Address[], NOW(), NOW(), true, ARRAY[('license', '3795739934', '2019/08/08', '2021/08/07')]::Document[]),
+('Rheta Trewman', 'rtrewman3@yellowpages.com', '+47 144 578 1425', 'DYLSyGHE3', ARRAY[('8 Bartelt Crossing', 'Les Abymes', '97182', 'Guadeloupe')]::Address[], NOW(), NOW(), true, ARRAY[('license', '0636288730', '2019/12/25', '2022/05/10')]::Document[]),
+('Hort Cadwallader', 'hcadwallader4@ibm.com', '+254 495 295 7406', 'YWJ2k8', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), true, ARRAY[('license', '1610164601', '2021/07/27', '2021/09/15')]::Document[]),
 ('Juliet Itzhak', 'jitzhak5@tumblr.com', '+86 866 469 9224', 'I13wS8oCIBN', ARRAY[('805 Gulseth Circle', 'Karanggeneng', '45329', 'Indonesia')]::Address[], NOW(), NOW(), true, ARRAY[('license', '9721186619', '2020/10/07', '2021/09/02')]::Document[]),
-('Gerardo Garnar', 'ggarnar6@google.it', '+62 272 486 2375', 'mjjeQy', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), false, ARRAY[('license', '4443595244', '2021/07/14', '2022/04/18')]::Document[]),
+('Gerardo Garnar', 'ggarnar6@google.it', '+62 272 486 2375', 'mjjeQy', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany')]::Address[], NOW(), NOW(), true, ARRAY[('license', '4443595244', '2021/07/14', '2022/04/18')]::Document[]),
 ('Mabel Rawdales', 'mrawdales7@imageshack.us', '+47 874 108 7793', 'B6lbfZv5nPEg', ARRAY[('089 Cherokee Way', 'Stírion', '47541', 'Greece')]::Address[], NOW(), NOW(), true, ARRAY[('license', '8343329236', '2021/10/01', '2022/01/10')]::Document[]),
 ('Simmonds Reding', 'sreding8@comcast.net', '+34 644 253 1371', 'eJBV8iAs', ARRAY[('Obere Str. 57', 'Berlin', '12209', 'Germany'), ('22 Messerschmidt Park', 'Huimin', null, 'China')]::Address[], NOW(), NOW(), true, ARRAY[('license', '4184470335', '2021/09/17', '2022/01/09')]::Document[]),
-('Kennie Grimmett', 'kgrimmett9@bing.com', '+86 517 853 5063', '3qZgWw6YMBpk', ARRAY[('19 Northport Drive', 'Graz', '8042', 'Austria')]::Address[], NOW(), NOW(), false, ARRAY[('license', '2105942407', '2022/03/10', '2022/03/02')]::Document[]);
+('Kennie Grimmett', 'kgrimmett9@bing.com', '+86 517 853 5063', '3qZgWw6YMBpk', ARRAY[('19 Northport Drive', 'Graz', '8042', 'Austria')]::Address[], NOW(), NOW(), true, ARRAY[('license', '2105942407', '2022/03/10', '2022/03/02')]::Document[]);
 
 
 -- inherit customer from user table

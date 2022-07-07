@@ -312,7 +312,6 @@ INSERT INTO payment(trip_id, payment_date, type, base_rate, surge_rate, tip_amou
 VALUES
 (15, NOW(), 'online', '30.72',  '0.00', '5.00', '35.72'), 
 (12, NOW(), 'cash', '30.72', '0.00', '2.00', '32.72'),
-(20, NOW(), 'cash', '25.36', '1.00', '3.00', '29.36'),
 (11, NOW(), 'online', '25.36', '0.00', '4.00', '29.36'),
 (10, NOW(), 'cash', '25.36', '2.00', '6.00', '32.36'),
 (2, NOW(), 'cash', '98.46', '0.00', '1.00', '99.46'),
@@ -331,8 +330,35 @@ VALUES
 
 
 
+--  4 (a)
+SELECT trip.id AS trip_id, rider.name AS rider, customer.name as customer, car.license_plate_no, 
+trip.status AS trip_status, payment.total as total_paid, payment.type As payment_type, trip.rider_rating, trip.customer_rating
+FROM trip
+INNER JOIN rider ON trip.rider_id=rider.id
+INNER JOIN car ON rider.id=car.rider_id
+LEFT JOIN customer ON trip.customer_id=customer.id
+LEFT JOIN payment ON payment.trip_id=trip.id
+WHERE trip.status='completed' AND payment.total::numeric > 50.00
+ORDER BY payment.total DESC;
 
 
+-- 4 (b)
+SELECT rider.name, rider.address[1].country, rider.address[2].country from rider WHERE rider.address[1].country='Germany';
 
+-- 4 (c)
+SELECT trip.id AS trip_id, trip.requested_on, trip.status, payment.total
+FROM trip
+LEFT JOIN payment ON payment.trip_id=trip.id
+WHERE trip.requested_on BETWEEN 
+('2022-03-15 07:45:19'::date - '6 months'::interval) and ('2022-03-15 07:45:19'::date + '2 weeks'::interval) AND trip.status='completed'
+ORDER BY trip.requested_on ASC;
+
+-- 4 (d)
+SELECT rider.name AS rider, sum(payment.total)
+OVER (PARTITION BY rider.name)
+FROM trip
+INNER JOIN rider ON trip.rider_id=rider.id
+INNER JOIN payment ON payment.trip_id=trip.id
+WHERE trip.status='completed';
 
 

@@ -230,7 +230,7 @@ UPDATE trip SET start_on=NOW(), status='inprogress' WHERE id=18;
 UPDATE trip SET start_on=NOW(), status='inprogress' WHERE id=19;
 
 
--- after the they reach destination, drive updates the status to completed and set the end time
+-- after the they reach destination, rider updates the status to completed and set the end time
 UPDATE trip SET end_on=NOW(), status='completed' WHERE id=1;
 UPDATE trip SET end_on=NOW(), status='completed' WHERE id=2;
 UPDATE trip SET end_on=NOW(), status='completed' WHERE id=3;

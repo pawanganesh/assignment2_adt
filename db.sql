@@ -40,13 +40,17 @@ CREATE TYPE Location AS (
 );
 
 
-CREATE TYPE Color AS ENUM ('red', 'green', 'blue', 'yellow', 'black', 'white', 'grey', 'purple', 'brown', 'orange', 'pink', 'silver', 'gold');
+CREATE TYPE Color AS ENUM 
+('red', 'green', 'blue', 'yellow', 'black', 'white', 'grey', 'purple', 'brown', 'orange', 'pink', 'silver', 'gold');
 
-CREATE TYPE TripStatus AS ENUM ('requested', 'accepted', 'inprogress', 'cancelled', 'completed');
+CREATE TYPE TripStatus AS ENUM 
+('requested', 'accepted', 'inprogress', 'cancelled', 'completed');
 
-CREATE TYPE Rating AS ENUM ('1', '2', '3', '4', '5');
+CREATE TYPE Rating AS ENUM 
+('1', '2', '3', '4', '5');
 
-CREATE TYPE PaymentType AS ENUM ('online', 'cash', 'card');
+CREATE TYPE PaymentType AS ENUM 
+('online', 'cash', 'card');
 
 
 -- base user table
@@ -331,34 +335,52 @@ VALUES
 
 
 --  4 (a)
-SELECT trip.id AS trip_id, rider.name AS rider, customer.name as customer, car.license_plate_no, 
-trip.status AS trip_status, payment.total as total_paid, payment.type As payment_type, trip.rider_rating, trip.customer_rating
+SELECT trip.id AS 
+trip_id, rider.name AS rider, 
+customer.name as customer, 
+car.license_plate_no, 
+trip.status AS trip_status, 
+payment.total as total_paid, 
+payment.type As payment_type, 
+trip.rider_rating, 
+trip.customer_rating
 FROM trip
 INNER JOIN rider ON trip.rider_id=rider.id
 INNER JOIN car ON rider.id=car.rider_id
 LEFT JOIN customer ON trip.customer_id=customer.id
 LEFT JOIN payment ON payment.trip_id=trip.id
-WHERE trip.status='completed' AND payment.total::numeric > 50.00
+WHERE trip.status='completed' 
+AND payment.total::numeric > 50.00
 ORDER BY payment.total DESC;
 
 
 -- 4 (b)
-SELECT rider.name, rider.address[1].country, rider.address[2].country from rider WHERE rider.address[1].country='Germany';
+SELECT rider.name, 
+rider.address[1].country, 
+rider.address[2].country 
+from rider
+WHERE rider.address[1].country='Germany';
 
 -- 4 (c)
-SELECT trip.id AS trip_id, trip.requested_on, trip.status, payment.total
+SELECT trip.id AS trip_id, 
+trip.requested_on, trip.status,
+payment.total
 FROM trip
 LEFT JOIN payment ON payment.trip_id=trip.id
 WHERE trip.requested_on BETWEEN 
-('2022-03-15 07:45:19'::date - '6 months'::interval) and ('2022-03-15 07:45:19'::date + '2 weeks'::interval) AND trip.status='completed'
+('2022-03-15 07:45:19'::date - '6 months'::interval)
+AND ('2022-03-15 07:45:19'::date + '2 weeks'::interval) 
+AND trip.status='completed'
 ORDER BY trip.requested_on ASC;
 
 -- 4 (d)
-SELECT rider.name AS rider, sum(payment.total)
+SELECT rider.name AS rider, 
+sum(payment.total)
 OVER (PARTITION BY rider.name)
 FROM trip
 INNER JOIN rider ON trip.rider_id=rider.id
 INNER JOIN payment ON payment.trip_id=trip.id
 WHERE trip.status='completed';
+
 
 

@@ -24,18 +24,19 @@ db.createCollection('trip')
 
 
 // insert data into customer
+db.customer.insert({
+    _id: ObjectId("62c5d8bbd61d7ef956e3cb2b"),
+    name: "Loraine Giddings",
+    phone_number: "+1 (865) 581-9071",
+    email: "lorainegiddings@gmail.com",
+    password: "ZWYVIDd3W0",
+    account_balance: 100.60,
+    address: [{street: "0240 Larry Junction", city: "Guaxupé", postal_code: "37800", country: "Brazil"}],
+    created_at: new Date(),
+    updated_at: new Date()
+})
+
 db.customer.insertMany([
-    {
-        _id: ObjectId("62c5d8bbd61d7ef956e3cb2b"),
-        name: "Loraine Giddings",
-        phone_number: "+1 (865) 581-9071",
-        email: "lorainegiddings@gmail.com",
-        password: "ZWYVIDd3W0",
-        account_balance: 100.60,
-        address: [{street: "0240 Larry Junction", city: "Guaxupé", postal_code: "37800", country: "Brazil"}],
-        created_at: new Date(),
-        updated_at: new Date()
-    },
     {
         _id: ObjectId("62c5d8bbd61d7ef956e3cb2c"),
         name: "Rudolpho Giddings",
@@ -138,7 +139,7 @@ db.customer.insertMany([
 ])
 
 // insert data into rider
-db.rider.insertMany([
+db.rider.insert(
     {
         _id: ObjectId("62c5d8aad61d7ef956e3cb21"),
         name: "Lucilia Sowray",
@@ -152,7 +153,9 @@ db.rider.insertMany([
         car: {make: "Jeep", model: "Liberty", year: 2012, license_plate_no: "AAA 7836", color: 'yellow', base_rate: 67.96},
         created_at: new Date(),
         updated_at: new Date()
-    },
+    })
+
+db.rider.insertMany([
     {
         _id: ObjectId("62c5d8aad61d7ef956e3cb22"),
         name: "Alvis Higford",
@@ -273,7 +276,7 @@ db.rider.insertMany([
 ])
 
 // insert data into trip
-db.trip.insertMany([
+db.trip.insert(
     {
         _id: ObjectId("62c5da2d8cf53304b1cd7e91"),
         requested_on: new Date("2021-11-04 14:31:52"),
@@ -292,7 +295,9 @@ db.trip.insertMany([
             $ref: "customer",
             $id: ObjectId("62c5d8bbd61d7ef956e3cb34")
         }
-    },
+    })
+
+db.trip.insertMany([
     {
         _id: ObjectId("62c5da2d8cf53304b1cd7e92"),
         requested_on: new Date("2022-03-15 07:45:19"),
@@ -907,49 +912,141 @@ db.trip.update({_id: ObjectId("62c5da2d8cf53304b1cd7108")}, {$set: {payment: {
 
 
 // 5 (a)
+
 db.trip.aggregate([
+    {$match: {status: 'completed'}},
     {
-        $lookup:
-            {
-                from: "rider",
-                localField: "rider.$id",
-                foreignField: "_id",
-                as: "rider"
+        $addFields: {
+            "rider": {
+                $arrayElemAt: [{$objectToArray: "$rider"}, 1]
             }
+        }
+    }, {
+        $addFields: {"dbref_rider": "$rider.v"}
     },
     {
-        $lookup:
-        {
-                from: "customer",
-                localField: "customer.$id",
-                foreignField: "_id",
-                as: "customer"
+        $lookup: {
+            from: "rider",
+            localField: "dbref_rider",
+            foreignField: "_id",
+            as: "join_with_rider"
+        }
+    },
+    {
+        $addFields: {
+            "join_with_rider": {$arrayElemAt: ["$join_with_rider", 0]}
+        }
+    },
+    {
+        $addFields: {
+            "customer": {
+                $arrayElemAt: [{$objectToArray: "$customer"}, 1]
             }
+        }
+    }, {
+        $addFields: {"dbref_customer": "$customer.v"}
+    },
+    {
+        $lookup: {
+            from: "customer",
+            localField: "dbref_customer",
+            foreignField: "_id",
+            as: "join_with_customer"
+        }
+    },
+    {
+        $addFields: {
+            "join_with_customer": {$arrayElemAt: ["$join_with_customer", 0]}
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "trip_id": "$_id",
+            "rider": "$join_with_rider.name",
+            "customer": "$join_with_customer.name",
+            "license_plate_no": "$join_with_rider.car.license_plate_no",
+            "trip_status": "$status",
+            "total_paid": "$payment.total",
+            "payment_type": "$payment.type",
+            "customer_rating": "$customer_rating",
+            "rider_rating": "$rider_rating",
+
+        }
     }
 ]).pretty()
 
 
 // 5 (b)
-db.rider.find({'address.country': 'Germany'}).pretty()
+db.rider.aggregate([
+    {$match: {"address.country": "Germany"}},
+    {
+        $project: {
+            _id: 0,
+            name: 1,
+            "country": "$address.country"
+        },
+    }
+]).pretty()
 
 // 5 (c)
-db.trip.find({
-    requested_on: {
-        $gt: ISODate("2022-01-01"),
-        $lte: ISODate("2022-07-01")
+db.trip.aggregate([
+    {
+        $project: {
+            _id: 0,
+            "trip_id": "$_id",
+            "requested_on": 1,
+            "status": 1,
+            "total": "$payment.total"
+        },
     },
-    status: "completed"
-}).pretty()
+    {
+        $match: {
+            requested_on: {
+                $gt: ISODate("2022-01-01"),
+                $lt: ISODate("2022-07-01")
+            }
+        }
+    }
+])
 
 // 5 (d)
 
 db.trip.aggregate([
     {$match: {status: 'completed'}},
-    {$group: {
-        _id: "$payment.type",
-        total: {$sum: "$payment.total"}
-    }
-    }
+    {
+        $addFields: {
+            "rider": {
+                $arrayElemAt: [{$objectToArray: "$rider"}, 1]
+            }
+        }
+    }, {
+        $addFields: {"dbref_rider": "$rider.v"}
+    },
+    {
+        $lookup: {
+            from: "rider",
+            localField: "dbref_rider",
+            foreignField: "_id",
+            as: "join_with_rider"
+        }
+    },
+    {
+        $addFields: {
+            "join_with_rider": {$arrayElemAt: ["$join_with_rider", 0]}
+        }
+    },
+    {
+        $group: {
+          _id: "$join_with_rider.name",
+          rider: { $push: "$join_with_rider.name" },
+          sum_amount: { $sum: "$payment.total" },
+          average_amount: { $avg: "$payment.total" },
+        },
+      },
+  { $unwind: "$rider" },
+  { $sort: { rider: 1 } },
+
 ]).pretty()
 
 

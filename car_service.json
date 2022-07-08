@@ -4,11 +4,13 @@ show dbs
 // create database if not exists and switch to database
 use car_service
 
-// drop database
-//db.dropDatabase()
-
 // view current database
 db
+
+//drop collections
+db.trip.drop()
+db.trip.customer()
+db.trip.rider()
 
 // show all collections
 show collections
